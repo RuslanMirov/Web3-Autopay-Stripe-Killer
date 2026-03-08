@@ -1,0 +1,20 @@
+{
+  "name": "recurring-payments-erc4337",
+  "version": "1.0.0",
+  "description": "ERC-4337 recurring payments – SubscriptionManager + Hardhat test suite",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
+    "@nomicfoundation/hardhat-ethers": "^3.0.0",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
+    "@openzeppelin/contracts": "^5.0.0",
+    "chai": "^4.2.0",
+    "ethers": "^6.0.0",
+    "hardhat": "^2.22.0",
+    "mocha": "^10.0.0",
+    "solc": "^0.8.26"
+  }
+}

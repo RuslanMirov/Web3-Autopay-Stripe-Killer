@@ -31,6 +31,29 @@ The project will include the following components:
 4. **Private Frontend Repository**
    User interface for managing subscriptions and payments.
 
+
+# Contracts
+
+```
+SubscriptionManager.sol
+The main contract implementing:
+
+Subscription creation – payer, recipient, token, amount, interval, totalCap, sessionKey
+Bundler execution – whitelisted bundler submits executePayment() (mirrors ERC-4337 Bundler→EntryPoint flow)
+Session keys – payer can delegate execution to a secondary key
+Risk limits – per-subscription totalCap enforces lifetime spending ceiling
+Refunds – merchant calls refundPayment(subId, cycle) to return funds to payer
+Paymaster – ETH deposit/deduct/withdraw for gas sponsorship simulation
+```
+
+# TODO
+
+```
+1) SDK for developers for easy integration
+2) UI/Backend for UX
+```
+
+
 ## Join the Project
 
 If you are interested in discussing the project, collaborating, or contributing:
