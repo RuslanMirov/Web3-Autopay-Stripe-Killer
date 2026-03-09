@@ -49,7 +49,8 @@ Paymaster – ETH deposit/deduct/withdraw for gas sponsorship simulation
 # TODO
 
 ```
-1) SDK for developers for easy integration
+0) Improve for SubscriptionManager layer for suport multy dapps payments SDK
+1) SDK for developers for easy integration in their dapps
 2) UI/Backend for UX
 ```
 
