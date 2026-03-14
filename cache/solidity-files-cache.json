@@ -1,18 +1,18 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/contracts/MockUSDC.sol": {
-      "lastModificationDate": 1773004110217,
-      "contentHash": "a793447a0dd84eb4e505a523a598c2ad",
-      "sourceName": "contracts/MockUSDC.sol",
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/contracts/ClaimBundlerHelper.sol": {
+      "lastModificationDate": 1773472251273,
+      "contentHash": "148baff2ba80be320696e24318336376",
+      "sourceName": "contracts/ClaimBundlerHelper.sol",
       "solcConfig": {
-        "version": "0.8.26",
+        "version": "0.8.24",
         "settings": {
+          "evmVersion": "cancun",
           "optimizer": {
             "enabled": true,
             "runs": 200
           },
-          "evmVersion": "paris",
           "outputSelection": {
             "*": {
               "*": [
@@ -30,28 +30,65 @@
         }
       },
       "imports": [
-        "@openzeppelin/contracts/token/ERC20/ERC20.sol",
-        "@openzeppelin/contracts/access/Ownable.sol"
+        "./interfaces/IERC4337.sol",
+        "./SubscriptionWallet.sol"
       ],
       "versionPragmas": [
         "^0.8.24"
       ],
       "artifacts": [
-        "MockUSDC"
+        "ClaimBundlerHelper"
       ]
     },
-    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
-      "lastModificationDate": 1773429569491,
-      "contentHash": "d15c4d05583536e080f1960ab282772d",
-      "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/contracts/interfaces/IERC4337.sol": {
+      "lastModificationDate": 1773472171678,
+      "contentHash": "fe218123b4874b8d5cb2fcfa50868323",
+      "sourceName": "contracts/interfaces/IERC4337.sol",
       "solcConfig": {
-        "version": "0.8.26",
+        "version": "0.8.24",
         "settings": {
+          "evmVersion": "cancun",
           "optimizer": {
             "enabled": true,
             "runs": 200
           },
-          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.24"
+      ],
+      "artifacts": [
+        "IAccount",
+        "IEntryPoint"
+      ]
+    },
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/contracts/SubscriptionWallet.sol": {
+      "lastModificationDate": 1773430740812,
+      "contentHash": "9c13998be5e876fc5f19cbd41c8ef335",
+      "sourceName": "contracts/SubscriptionWallet.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "cancun",
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
           "outputSelection": {
             "*": {
               "*": [
@@ -69,30 +106,33 @@
         }
       },
       "imports": [
-        "./IERC20.sol",
-        "./extensions/IERC20Metadata.sol",
-        "../../utils/Context.sol",
-        "../../interfaces/draft-IERC6093.sol"
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
+        "@openzeppelin/contracts/utils/ReentrancyGuard.sol",
+        "@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
+        "@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol",
+        "./interfaces/IERC4337.sol"
       ],
       "versionPragmas": [
-        "^0.8.20"
+        "^0.8.24"
       ],
       "artifacts": [
-        "ERC20"
+        "IPlatformRegistry",
+        "SubscriptionWallet"
       ]
     },
-    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
-      "lastModificationDate": 1773429569588,
-      "contentHash": "d3c790edc9ccf808a17c5a6cd13614fd",
-      "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/utils/ReentrancyGuard.sol": {
+      "lastModificationDate": 1773429569593,
+      "contentHash": "6e5efb502dd6652d12ad15eea2c5bdf4",
+      "sourceName": "@openzeppelin/contracts/utils/ReentrancyGuard.sol",
       "solcConfig": {
-        "version": "0.8.26",
+        "version": "0.8.24",
         "settings": {
+          "evmVersion": "cancun",
           "optimizer": {
             "enabled": true,
             "runs": 200
           },
-          "evmVersion": "paris",
           "outputSelection": {
             "*": {
               "*": [
@@ -110,13 +150,13 @@
         }
       },
       "imports": [
-        "../utils/Context.sol"
+        "./StorageSlot.sol"
       ],
       "versionPragmas": [
         "^0.8.20"
       ],
       "artifacts": [
-        "Ownable"
+        "ReentrancyGuard"
       ]
     },
     "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
@@ -124,13 +164,13 @@
       "contentHash": "9261adf6457863de3e9892f51317ec89",
       "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
       "solcConfig": {
-        "version": "0.8.26",
+        "version": "0.8.24",
         "settings": {
+          "evmVersion": "cancun",
           "optimizer": {
             "enabled": true,
             "runs": 200
           },
-          "evmVersion": "paris",
           "outputSelection": {
             "*": {
               "*": [
@@ -155,18 +195,18 @@
         "IERC20"
       ]
     },
-    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/utils/Context.sol": {
-      "lastModificationDate": 1773429569429,
-      "contentHash": "67bfbc07588eb8683b3fd8f6f909563e",
-      "sourceName": "@openzeppelin/contracts/utils/Context.sol",
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/utils/cryptography/ECDSA.sol": {
+      "lastModificationDate": 1773429569451,
+      "contentHash": "b038f3665d2262af34fe6009e3cd78dd",
+      "sourceName": "@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
       "solcConfig": {
-        "version": "0.8.26",
+        "version": "0.8.24",
         "settings": {
+          "evmVersion": "cancun",
           "optimizer": {
             "enabled": true,
             "runs": 200
           },
-          "evmVersion": "paris",
           "outputSelection": {
             "*": {
               "*": [
@@ -188,21 +228,98 @@
         "^0.8.20"
       ],
       "artifacts": [
-        "Context"
+        "ECDSA"
       ]
     },
-    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/interfaces/draft-IERC6093.sol": {
-      "lastModificationDate": 1773429569447,
-      "contentHash": "bcc76f4747d56c28c40ae272ef3470a6",
-      "sourceName": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol",
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol": {
+      "lastModificationDate": 1773429569585,
+      "contentHash": "fab97298382d4c32182a66ec35255b71",
+      "sourceName": "@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol",
       "solcConfig": {
-        "version": "0.8.26",
+        "version": "0.8.24",
         "settings": {
+          "evmVersion": "cancun",
           "optimizer": {
             "enabled": true,
             "runs": 200
           },
-          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../Strings.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.24"
+      ],
+      "artifacts": [
+        "MessageHashUtils"
+      ]
+    },
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol": {
+      "lastModificationDate": 1773429569598,
+      "contentHash": "bf8e9c3398d381dc66c5302267927386",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "cancun",
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../IERC20.sol",
+        "../../../interfaces/IERC1363.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "SafeERC20"
+      ]
+    },
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/utils/StorageSlot.sol": {
+      "lastModificationDate": 1773429569604,
+      "contentHash": "e656d64c4ce918f3d13030b91c935134",
+      "sourceName": "@openzeppelin/contracts/utils/StorageSlot.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "cancun",
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
           "outputSelection": {
             "*": {
               "*": [
@@ -221,26 +338,24 @@
       },
       "imports": [],
       "versionPragmas": [
-        ">=0.8.4"
+        "^0.8.20"
       ],
       "artifacts": [
-        "IERC1155Errors",
-        "IERC20Errors",
-        "IERC721Errors"
+        "StorageSlot"
       ]
     },
-    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
-      "lastModificationDate": 1773429569567,
-      "contentHash": "513778b30d2750f5d2b9b19bbcf748a5",
-      "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
+      "lastModificationDate": 1773429569606,
+      "contentHash": "d2fa243e766a193585b7e9bf36898d80",
+      "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
       "solcConfig": {
-        "version": "0.8.26",
+        "version": "0.8.24",
         "settings": {
+          "evmVersion": "cancun",
           "optimizer": {
             "enabled": true,
             "runs": 200
           },
-          "evmVersion": "paris",
           "outputSelection": {
             "*": {
               "*": [
@@ -258,27 +373,30 @@
         }
       },
       "imports": [
-        "../IERC20.sol"
+        "./math/Math.sol",
+        "./math/SafeCast.sol",
+        "./math/SignedMath.sol",
+        "./Bytes.sol"
       ],
       "versionPragmas": [
-        ">=0.6.2"
+        "^0.8.24"
       ],
       "artifacts": [
-        "IERC20Metadata"
+        "Strings"
       ]
     },
-    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/interfaces/IERC20.sol": {
-      "lastModificationDate": 1773429569566,
-      "contentHash": "68620db2da7583d9a4919096ac77f577",
-      "sourceName": "@openzeppelin/contracts/interfaces/IERC20.sol",
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/utils/Bytes.sol": {
+      "lastModificationDate": 1773429569397,
+      "contentHash": "3b32ea3a40a2d708f61e7161f081ca93",
+      "sourceName": "@openzeppelin/contracts/utils/Bytes.sol",
       "solcConfig": {
-        "version": "0.8.26",
+        "version": "0.8.24",
         "settings": {
+          "evmVersion": "cancun",
           "optimizer": {
             "enabled": true,
             "runs": 200
           },
-          "evmVersion": "paris",
           "outputSelection": {
             "*": {
               "*": [
@@ -296,25 +414,176 @@
         }
       },
       "imports": [
-        "../token/ERC20/IERC20.sol"
+        "./math/Math.sol"
       ],
       "versionPragmas": [
-        ">=0.4.16"
+        "^0.8.24"
       ],
-      "artifacts": []
+      "artifacts": [
+        "Bytes"
+      ]
+    },
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/utils/math/Math.sol": {
+      "lastModificationDate": 1773429569583,
+      "contentHash": "5b8c6935ac52b7494df19d6feb38f5cc",
+      "sourceName": "@openzeppelin/contracts/utils/math/Math.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "cancun",
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../Panic.sol",
+        "./SafeCast.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "Math"
+      ]
+    },
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/utils/math/SignedMath.sol": {
+      "lastModificationDate": 1773429569600,
+      "contentHash": "ae3528afb8bdb0a7dcfba5b115ee8074",
+      "sourceName": "@openzeppelin/contracts/utils/math/SignedMath.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "cancun",
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./SafeCast.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "SignedMath"
+      ]
+    },
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/utils/math/SafeCast.sol": {
+      "lastModificationDate": 1773429569597,
+      "contentHash": "f28a38cd37f4225d0a91fb5405dd850f",
+      "sourceName": "@openzeppelin/contracts/utils/math/SafeCast.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "cancun",
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "SafeCast"
+      ]
+    },
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/utils/Panic.sol": {
+      "lastModificationDate": 1773429569591,
+      "contentHash": "2133dc13536b4a6a98131e431fac59e1",
+      "sourceName": "@openzeppelin/contracts/utils/Panic.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "cancun",
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "Panic"
+      ]
     },
     "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/interfaces/IERC1363.sol": {
       "lastModificationDate": 1773429569562,
       "contentHash": "a7fd0f05e36b0d0a21c75340c9c639ec",
       "sourceName": "@openzeppelin/contracts/interfaces/IERC1363.sol",
       "solcConfig": {
-        "version": "0.8.26",
+        "version": "0.8.24",
         "settings": {
+          "evmVersion": "cancun",
           "optimizer": {
             "enabled": true,
             "runs": 200
           },
-          "evmVersion": "paris",
           "outputSelection": {
             "*": {
               "*": [
@@ -347,13 +616,13 @@
       "contentHash": "947853028399b7de34bcc3704ee06e99",
       "sourceName": "@openzeppelin/contracts/interfaces/IERC165.sol",
       "solcConfig": {
-        "version": "0.8.26",
+        "version": "0.8.24",
         "settings": {
+          "evmVersion": "cancun",
           "optimizer": {
             "enabled": true,
             "runs": 200
           },
-          "evmVersion": "paris",
           "outputSelection": {
             "*": {
               "*": [
@@ -378,18 +647,54 @@
       ],
       "artifacts": []
     },
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/interfaces/IERC20.sol": {
+      "lastModificationDate": 1773429569566,
+      "contentHash": "68620db2da7583d9a4919096ac77f577",
+      "sourceName": "@openzeppelin/contracts/interfaces/IERC20.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "cancun",
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../token/ERC20/IERC20.sol"
+      ],
+      "versionPragmas": [
+        ">=0.4.16"
+      ],
+      "artifacts": []
+    },
     "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
       "lastModificationDate": 1773429569564,
       "contentHash": "7074c93b1ea0a122063f26ddd1db1032",
       "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
       "solcConfig": {
-        "version": "0.8.26",
+        "version": "0.8.24",
         "settings": {
+          "evmVersion": "cancun",
           "optimizer": {
             "enabled": true,
             "runs": 200
           },
-          "evmVersion": "paris",
           "outputSelection": {
             "*": {
               "*": [
@@ -414,18 +719,18 @@
         "IERC165"
       ]
     },
-    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol": {
-      "lastModificationDate": 1773429569598,
-      "contentHash": "bf8e9c3398d381dc66c5302267927386",
-      "sourceName": "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/contracts/WalletFactory.sol": {
+      "lastModificationDate": 1773430740812,
+      "contentHash": "c34ef8a12b01c6d4377350ea4be42c8f",
+      "sourceName": "contracts/WalletFactory.sol",
       "solcConfig": {
-        "version": "0.8.26",
+        "version": "0.8.24",
         "settings": {
+          "evmVersion": "cancun",
           "optimizer": {
             "enabled": true,
             "runs": 200
           },
-          "evmVersion": "paris",
           "outputSelection": {
             "*": {
               "*": [
@@ -443,68 +748,27 @@
         }
       },
       "imports": [
-        "../IERC20.sol",
-        "../../../interfaces/IERC1363.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "SafeERC20"
-      ]
-    },
-    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/contracts/SubscriptionManager.sol": {
-      "lastModificationDate": 1773429884370,
-      "contentHash": "14953fdb73e2e6b80ab7058941250f1c",
-      "sourceName": "contracts/SubscriptionManager.sol",
-      "solcConfig": {
-        "version": "0.8.26",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-        "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
-        "@openzeppelin/contracts/utils/ReentrancyGuard.sol"
+        "./SubscriptionWallet.sol"
       ],
       "versionPragmas": [
         "^0.8.24"
       ],
       "artifacts": [
-        "SubscriptionManager"
+        "WalletFactory"
       ]
     },
-    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/utils/ReentrancyGuard.sol": {
-      "lastModificationDate": 1773429569593,
-      "contentHash": "6e5efb502dd6652d12ad15eea2c5bdf4",
-      "sourceName": "@openzeppelin/contracts/utils/ReentrancyGuard.sol",
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
+      "lastModificationDate": 1773429569567,
+      "contentHash": "513778b30d2750f5d2b9b19bbcf748a5",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
       "solcConfig": {
-        "version": "0.8.26",
+        "version": "0.8.24",
         "settings": {
+          "evmVersion": "cancun",
           "optimizer": {
             "enabled": true,
             "runs": 200
           },
-          "evmVersion": "paris",
           "outputSelection": {
             "*": {
               "*": [
@@ -522,27 +786,68 @@
         }
       },
       "imports": [
-        "./StorageSlot.sol"
+        "../IERC20.sol"
+      ],
+      "versionPragmas": [
+        ">=0.6.2"
+      ],
+      "artifacts": [
+        "IERC20Metadata"
+      ]
+    },
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
+      "lastModificationDate": 1773429569491,
+      "contentHash": "d15c4d05583536e080f1960ab282772d",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "cancun",
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IERC20.sol",
+        "./extensions/IERC20Metadata.sol",
+        "../../utils/Context.sol",
+        "../../interfaces/draft-IERC6093.sol"
       ],
       "versionPragmas": [
         "^0.8.20"
       ],
       "artifacts": [
-        "ReentrancyGuard"
+        "ERC20"
       ]
     },
-    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/utils/StorageSlot.sol": {
-      "lastModificationDate": 1773429569604,
-      "contentHash": "e656d64c4ce918f3d13030b91c935134",
-      "sourceName": "@openzeppelin/contracts/utils/StorageSlot.sol",
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/utils/Context.sol": {
+      "lastModificationDate": 1773429569429,
+      "contentHash": "67bfbc07588eb8683b3fd8f6f909563e",
+      "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
-        "version": "0.8.26",
+        "version": "0.8.24",
         "settings": {
+          "evmVersion": "cancun",
           "optimizer": {
             "enabled": true,
             "runs": 200
           },
-          "evmVersion": "paris",
           "outputSelection": {
             "*": {
               "*": [
@@ -564,7 +869,165 @@
         "^0.8.20"
       ],
       "artifacts": [
-        "StorageSlot"
+        "Context"
+      ]
+    },
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/node_modules/@openzeppelin/contracts/interfaces/draft-IERC6093.sol": {
+      "lastModificationDate": 1773429569447,
+      "contentHash": "bcc76f4747d56c28c40ae272ef3470a6",
+      "sourceName": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "cancun",
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.8.4"
+      ],
+      "artifacts": [
+        "IERC1155Errors",
+        "IERC20Errors",
+        "IERC721Errors"
+      ]
+    },
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/contracts/Mocks.sol": {
+      "lastModificationDate": 1773431230202,
+      "contentHash": "377b5a44bbebe37b53e93ce8eedd2896",
+      "sourceName": "contracts/Mocks.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "cancun",
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        "./interfaces/IERC4337.sol",
+        "./SubscriptionWallet.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.24"
+      ],
+      "artifacts": [
+        "MockEntryPoint",
+        "MockService",
+        "MockUSDC"
+      ]
+    },
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/contracts/ServiceBase.sol": {
+      "lastModificationDate": 1773430740812,
+      "contentHash": "b0ea7ad3933665cf81a7dfac6bffa9ae",
+      "sourceName": "contracts/ServiceBase.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "cancun",
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
+        "@openzeppelin/contracts/utils/ReentrancyGuard.sol",
+        "./interfaces/IERC4337.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.24"
+      ],
+      "artifacts": [
+        "ServiceBase",
+        "StreamingService"
+      ]
+    },
+    "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/contracts/PlatformRegistry.sol": {
+      "lastModificationDate": 1773430740811,
+      "contentHash": "7343fabe33b28b26f8b9ee25b25f15dd",
+      "sourceName": "contracts/PlatformRegistry.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "cancun",
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.24"
+      ],
+      "artifacts": [
+        "PlatformRegistry"
       ]
     }
   }

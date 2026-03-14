@@ -18,7 +18,7 @@ struct UserOperation {
     bytes     signature;            // Owner ECDSA sig OR empty bytes for subscription claims
 }
 
-/// @notice Validation result codes
+/// @dev Validation result codes
 uint256 constant SIG_VALIDATION_SUCCESS = 0;
 uint256 constant SIG_VALIDATION_FAILED  = 1;
 

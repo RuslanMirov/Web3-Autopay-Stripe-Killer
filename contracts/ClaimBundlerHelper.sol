@@ -22,6 +22,7 @@ import "./SubscriptionWallet.sol";
 contract ClaimBundlerHelper {
 
     IEntryPoint public immutable entryPoint;
+    bytes4 private constant CLAIM_MAGIC = 0x7c1e2e76;
 
     // Gas limits tuned for typical claim operations
     uint256 public constant DEFAULT_CALL_GAS_LIMIT         = 100_000;
@@ -48,7 +49,7 @@ contract ClaimBundlerHelper {
     ) external view returns (UserOperation memory op) {
         // Subscription claim "signature": magic bytes + service address
         bytes memory sig = abi.encodePacked(
-            SubscriptionWallet.CLAIM_MAGIC,
+            CLAIM_MAGIC,
             abi.encode(service)
         );
 

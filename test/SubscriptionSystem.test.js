@@ -104,9 +104,9 @@ async function deployFixture() {
   );
 
   // Deploy Alice's wallet via factory
-  const tx        = await factory.createWallet(alice.address, ethers.ZeroPadBytes("0x", 32));
+  const tx        = await factory.createWallet(alice.address, ethers.zeroPadBytes("0x", 32));
   const receipt   = await tx.wait();
-  const walletAddr = await factory.getWalletAddress(alice.address, ethers.ZeroPadBytes("0x", 32));
+  const walletAddr = await factory.getWalletAddress(alice.address, ethers.zeroPadBytes("0x", 32));
   const SubscriptionWallet = await ethers.getContractFactory("SubscriptionWallet");
   const wallet    = SubscriptionWallet.attach(walletAddr);
 
@@ -257,7 +257,7 @@ describe("[A] PlatformRegistry", function () {
 describe("[B] WalletFactory", function () {
   it("B1. deploys wallet at predicted counterfactual address", async () => {
     const { factory, alice } = await deployFixture();
-    const salt       = ethers.ZeroPadBytes("0x", 32);
+    const salt       = ethers.zeroPadBytes("0x", 32);
     const predicted  = await factory.getWalletAddress(alice.address, salt);
     const tx         = await factory.createWallet(alice.address, salt);
     await tx.wait();
@@ -266,7 +266,7 @@ describe("[B] WalletFactory", function () {
 
   it("B2. createWallet is idempotent — second call returns same address", async () => {
     const { factory, alice } = await deployFixture();
-    const salt = ethers.ZeroPadBytes("0x", 32);
+    const salt = ethers.zeroPadBytes("0x", 32);
     const tx1  = await factory.createWallet(alice.address, salt);
     const r1   = await tx1.wait();
     const tx2  = await factory.createWallet(alice.address, salt);
@@ -283,7 +283,7 @@ describe("[B] WalletFactory", function () {
 
   it("B3. different salts produce different wallet addresses", async () => {
     const { factory, alice } = await deployFixture();
-    const salt0 = ethers.ZeroPadBytes("0x", 32);
+    const salt0 = ethers.zeroPadBytes("0x", 32);
     const salt1 = ethers.zeroPadValue("0x01", 32);
     const addr0 = await factory.getWalletAddress(alice.address, salt0);
     const addr1 = await factory.getWalletAddress(alice.address, salt1);
@@ -292,7 +292,7 @@ describe("[B] WalletFactory", function () {
 
   it("B4. same salt but different owners produce different addresses", async () => {
     const { factory, alice, bob } = await deployFixture();
-    const salt  = ethers.ZeroPadBytes("0x", 32);
+    const salt  = ethers.zeroPadBytes("0x", 32);
     const addrA = await factory.getWalletAddress(alice.address, salt);
     const addrB = await factory.getWalletAddress(bob.address, salt);
     expect(addrA).to.not.equal(addrB);
@@ -300,7 +300,7 @@ describe("[B] WalletFactory", function () {
 
   it("B5. deployed wallet has correct entryPoint, registry, and owner", async () => {
     const { factory, alice, entryPoint, registry, SubscriptionWallet } = await deployFixture();
-    const salt    = ethers.ZeroPadBytes("0x", 32);
+    const salt    = ethers.zeroPadBytes("0x", 32);
     const addr    = await factory.getWalletAddress(alice.address, salt);
     await factory.createWallet(alice.address, salt);
     const wallet  = SubscriptionWallet.attach(addr);
@@ -312,7 +312,7 @@ describe("[B] WalletFactory", function () {
 
   it("B6. walletsByOwner tracks all wallets for a given owner", async () => {
     const { factory, alice } = await deployFixture();
-    const salt0 = ethers.ZeroPadBytes("0x", 32);
+    const salt0 = ethers.zeroPadBytes("0x", 32);
     const salt1 = ethers.zeroPadValue("0x01", 32);
     await factory.createWallet(alice.address, salt0);
     await factory.createWallet(alice.address, salt1);
