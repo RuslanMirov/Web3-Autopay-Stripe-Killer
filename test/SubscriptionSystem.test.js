@@ -496,6 +496,10 @@ describe("[C] SubscriptionWallet — management", function () {
 });
 
 // ─── [D] validateUserOp ───────────────────────────────────────────────────────
+//
+// FIX: All validateOnly calls use .staticCall so ethers v6 returns the
+//      uint256 return value directly instead of a TransactionResponse object.
+//      (validateOnly is non-view so ethers would otherwise send a tx.)
 
 describe("[D] validateUserOp — both paths", function () {
   it("D1. claim path: valid op returns SIG_VALIDATION_SUCCESS (0)", async () => {
@@ -505,7 +509,7 @@ describe("[D] validateUserOp — both paths", function () {
       await service.getAddress(),
       walletIface
     );
-    const result = await entryPoint.validateOnly(userOp);
+    const result = await entryPoint.validateOnly.staticCall(userOp);
     expect(result).to.equal(0n);
   });
 
@@ -515,14 +519,12 @@ describe("[D] validateUserOp — both paths", function () {
     // Create a rogue service (not whitelisted)
     const RogueSvc = await (await ethers.getContractFactory("MockService")).deploy(await usdc.getAddress());
 
-    // Manually build subscription state by subscribing after temporarily whitelisting
-    // (to isolate the "not whitelisted" check we just try without whitelisting)
     const userOp = buildClaimOp(
       await wallet.getAddress(),
       await RogueSvc.getAddress(),
       walletIface
     );
-    const result = await entryPoint.validateOnly(userOp);
+    const result = await entryPoint.validateOnly.staticCall(userOp);
     expect(result).to.equal(1n); // SIG_VALIDATION_FAILED
   });
 
@@ -533,7 +535,7 @@ describe("[D] validateUserOp — both paths", function () {
     const userOp = buildClaimOp(
       await wallet.getAddress(), await service.getAddress(), walletIface
     );
-    expect(await entryPoint.validateOnly(userOp)).to.equal(1n);
+    expect(await entryPoint.validateOnly.staticCall(userOp)).to.equal(1n);
   });
 
   it("D4. claim path: payment not yet due returns FAILED", async () => {
@@ -551,7 +553,7 @@ describe("[D] validateUserOp — both paths", function () {
     const userOp = buildClaimOp(
       await wallet.getAddress(), await service.getAddress(), walletIface
     );
-    expect(await entryPoint.validateOnly(userOp)).to.equal(1n);
+    expect(await entryPoint.validateOnly.staticCall(userOp)).to.equal(1n);
   });
 
   it("D5. claim path: insufficient wallet balance returns FAILED", async () => {
@@ -567,7 +569,7 @@ describe("[D] validateUserOp — both paths", function () {
     const userOp = buildClaimOp(
       await wallet.getAddress(), await service.getAddress(), walletIface
     );
-    expect(await entryPoint.validateOnly(userOp)).to.equal(1n);
+    expect(await entryPoint.validateOnly.staticCall(userOp)).to.equal(1n);
   });
 
   it("D6. claim path: cap already exceeded returns FAILED", async () => {
@@ -600,7 +602,7 @@ describe("[D] validateUserOp — both paths", function () {
     if (!sub.active) {
       // Auto-cancelled — validateUserOp must return FAILED
       const finalOp = buildClaimOp(await wallet.getAddress(), await service.getAddress(), walletIface, 99n);
-      expect(await entryPoint.validateOnly(finalOp)).to.equal(1n);
+      expect(await entryPoint.validateOnly.staticCall(finalOp)).to.equal(1n);
     }
     // Either auto-cancelled or cap exceeded — both are correct behavior
   });
@@ -613,7 +615,7 @@ describe("[D] validateUserOp — both paths", function () {
       callData: walletIface.encodeFunctionData("unsubscribe", [await service.getAddress()]),
       signature: buildClaimSig(await service.getAddress()),
     };
-    expect(await entryPoint.validateOnly(userOp)).to.equal(1n);
+    expect(await entryPoint.validateOnly.staticCall(userOp)).to.equal(1n);
   });
 
   it("D8. claim path: service in signature ≠ service in callData returns FAILED", async () => {
@@ -636,7 +638,7 @@ describe("[D] validateUserOp — both paths", function () {
       paymasterAndData:     "0x",
       signature:            buildClaimSig(await Svc2.getAddress()), // ← mismatch
     };
-    expect(await entryPoint.validateOnly(userOp)).to.equal(1n);
+    expect(await entryPoint.validateOnly.staticCall(userOp)).to.equal(1n);
   });
 
   it("D9. claim path: truncated signature (< 36 bytes) returns FAILED", async () => {
@@ -645,7 +647,7 @@ describe("[D] validateUserOp — both paths", function () {
       ...buildClaimOp(await wallet.getAddress(), await service.getAddress(), walletIface),
       signature: "0x7c1e2e76aabb", // only 6 bytes, not 36
     };
-    expect(await entryPoint.validateOnly(userOp)).to.equal(1n);
+    expect(await entryPoint.validateOnly.staticCall(userOp)).to.equal(1n);
   });
 
   it("D10. owner path: valid ECDSA signature returns SUCCESS", async () => {
@@ -666,7 +668,7 @@ describe("[D] validateUserOp — both paths", function () {
       signature:            "0x", // placeholder before signing
     };
     const signed = await signOwnerOp(alice, baseOp);
-    expect(await entryPoint.validateOnly(signed)).to.equal(0n);
+    expect(await entryPoint.validateOnly.staticCall(signed)).to.equal(0n);
   });
 
   it("D11. owner path: wrong signer returns FAILED (1)", async () => {
@@ -685,7 +687,7 @@ describe("[D] validateUserOp — both paths", function () {
       signature:            "0x",
     };
     const signed = await signOwnerOp(stranger, baseOp); // stranger, not owner
-    expect(await entryPoint.validateOnly(signed)).to.equal(1n);
+    expect(await entryPoint.validateOnly.staticCall(signed)).to.equal(1n);
   });
 
   it("D12. validateUserOp reverts if called by non-EntryPoint", async () => {
@@ -916,8 +918,8 @@ describe("[F] Edge cases — caps, auto-cancel, multi-service", function () {
     );
 
     const userOp = buildClaimOp(await wallet.getAddress(), await service.getAddress(), walletIface);
-    // validateUserOp returns 1 (FAILED) — claim never hits executeClaim
-    expect(await entryPoint.validateOnly(userOp)).to.equal(1n);
+    // validateUserOp returns 1 (FAILED) — staticCall to get return value directly
+    expect(await entryPoint.validateOnly.staticCall(userOp)).to.equal(1n);
   });
 
   it("F6. tokens stay in wallet after unsubscribe (not auto-returned)", async () => {

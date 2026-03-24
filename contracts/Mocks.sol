@@ -66,22 +66,22 @@ contract MockEntryPoint is IEntryPoint {
 
     // ── Test helpers ─────────────────────────────────────────────────────────
 
-    /// @notice Directly execute a single UserOp (like handleOps but returns
-    ///         the raw validationData for assertion in tests).
+    /// @notice Directly execute a single UserOp (like handleOps but reverts on
+    ///         validation failure so tests can assert with revertedWith).
     function simulateOp(UserOperation calldata userOp)
         external
         returns (uint256 validationData)
     {
         IAccount wallet = IAccount(userOp.sender);
         validationData = wallet.validateUserOp(userOp, keccak256(abi.encode(userOp)), 0);
-
-        if (validationData == 0) {
-            _executeCallData(userOp.sender, userOp.callData);
-            _nonces[userOp.sender]++;
-        }
+        require(validationData == 0, "EP: validation failed");
+        _executeCallData(userOp.sender, userOp.callData);
+        _nonces[userOp.sender]++;
     }
 
     /// @notice Just validate without executing (for validateUserOp unit tests).
+    ///         Must be called as eth_call / staticCall from JS so ethers v6
+    ///         returns the uint256 return value instead of a TransactionResponse.
     function validateOnly(UserOperation calldata userOp)
         external
         returns (uint256 validationData)
