@@ -60,19 +60,26 @@ function buildClaimOp(walletAddr, serviceAddr, walletIface, nonce = 0n) {
   };
 }
 
-// Sign a UserOp hash with owner key (Path A)
+// Sign a UserOp hash with owner key (Path A).
+// The hash is computed WITHOUT the signature field — matching MockEntryPoint._hashOp —
+// because the signature itself cannot be part of the data being signed (chicken-and-egg).
 async function signOwnerOp(signer, userOp) {
   const opHash = ethers.keccak256(
     ethers.AbiCoder.defaultAbiCoder().encode(
-      // matches MockEntryPoint.simulateOp hash: keccak256(abi.encode(userOp))
-      // For simplicity we use the same hash the mock uses
-      ["tuple(address,uint256,bytes,bytes,uint256,uint256,uint256,uint256,uint256,bytes,bytes)"],
-      [[
-        userOp.sender, userOp.nonce, userOp.initCode, userOp.callData,
-        userOp.callGasLimit, userOp.verificationGasLimit, userOp.preVerificationGas,
-        userOp.maxFeePerGas, userOp.maxPriorityFeePerGas, userOp.paymasterAndData,
-        userOp.signature,
-      ]]
+      ["address","uint256","bytes","bytes","uint256","uint256","uint256","uint256","uint256","bytes"],
+      [
+        userOp.sender,
+        userOp.nonce,
+        userOp.initCode,
+        userOp.callData,
+        userOp.callGasLimit,
+        userOp.verificationGasLimit,
+        userOp.preVerificationGas,
+        userOp.maxFeePerGas,
+        userOp.maxPriorityFeePerGas,
+        userOp.paymasterAndData,
+        // signature field intentionally excluded
+      ]
     )
   );
   const sig = await signer.signMessage(ethers.getBytes(opHash));

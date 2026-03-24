@@ -66,6 +66,25 @@ contract MockEntryPoint is IEntryPoint {
 
     // ── Test helpers ─────────────────────────────────────────────────────────
 
+    /// @notice Compute the userOpHash without the signature field.
+    ///         Mirrors real ERC-4337 EntryPoint behaviour: the hash the wallet
+    ///         owner signs must not include the signature itself (chicken-and-egg).
+    function _hashOp(UserOperation calldata userOp) internal pure returns (bytes32) {
+        return keccak256(abi.encode(
+            userOp.sender,
+            userOp.nonce,
+            userOp.initCode,
+            userOp.callData,
+            userOp.callGasLimit,
+            userOp.verificationGasLimit,
+            userOp.preVerificationGas,
+            userOp.maxFeePerGas,
+            userOp.maxPriorityFeePerGas,
+            userOp.paymasterAndData
+            // signature intentionally excluded
+        ));
+    }
+
     /// @notice Directly execute a single UserOp (like handleOps but reverts on
     ///         validation failure so tests can assert with revertedWith).
     function simulateOp(UserOperation calldata userOp)
@@ -73,7 +92,7 @@ contract MockEntryPoint is IEntryPoint {
         returns (uint256 validationData)
     {
         IAccount wallet = IAccount(userOp.sender);
-        validationData = wallet.validateUserOp(userOp, keccak256(abi.encode(userOp)), 0);
+        validationData = wallet.validateUserOp(userOp, _hashOp(userOp), 0);
         require(validationData == 0, "EP: validation failed");
         _executeCallData(userOp.sender, userOp.callData);
         _nonces[userOp.sender]++;
@@ -87,14 +106,14 @@ contract MockEntryPoint is IEntryPoint {
         returns (uint256 validationData)
     {
         IAccount wallet = IAccount(userOp.sender);
-        return wallet.validateUserOp(userOp, keccak256(abi.encode(userOp)), 0);
+        return wallet.validateUserOp(userOp, _hashOp(userOp), 0);
     }
 
     // ── Internal ──────────────────────────────────────────────────────────────
 
     function _handleOp(UserOperation calldata userOp) internal {
         IAccount wallet = IAccount(userOp.sender);
-        uint256 result = wallet.validateUserOp(userOp, keccak256(abi.encode(userOp)), 0);
+        uint256 result = wallet.validateUserOp(userOp, _hashOp(userOp), 0);
         require(result == 0, "EP: validation failed");
         _executeCallData(userOp.sender, userOp.callData);
         _nonces[userOp.sender]++;

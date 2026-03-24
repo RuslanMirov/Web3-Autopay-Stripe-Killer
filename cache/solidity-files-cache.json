@@ -911,8 +911,8 @@
       ]
     },
     "/home/rus/Projects/MY/Web3-Autopay-Stripe-Killer/contracts/Mocks.sol": {
-      "lastModificationDate": 1774347013544,
-      "contentHash": "12eec1de0a4f29797a87c7580ad73b5e",
+      "lastModificationDate": 1774347140390,
+      "contentHash": "2029f8d427dc7d4d19f4ceea347a5718",
       "sourceName": "contracts/Mocks.sol",
       "solcConfig": {
         "version": "0.8.24",
